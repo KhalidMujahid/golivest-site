@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Investment</title>
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/animate.css" />
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/all.min.css" />
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/lightbox.min.css" />
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/odometer.css" />
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/owl.min.css" />
+    <link rel="stylesheet" href="https://golivest.site/assets/front/css/main.css" />
+	<link rel="stylesheet" href="https://golivest.site/assets/front/css/toastr.min.css">
+
+    <link rel="shortcut icon" href="https://golivest.site/assets/images/Yo7c3v0R1650180806.png">
+
+</head>
+
+<body>
+    <!-- Overlayer -->
+    <span class="toTopBtn">
+        <i class="fas fa-angle-up"></i>
+    </span>
+    <div class="overlayer"></div>
+    <div class="loader"></div>
+    <!-- Overlayer -->
+
+    <!-- User Dashboard -->
+    <main class="dashboard-section">
+		<aside class="dashboard-sidebar">
+    <div class="bg--gradient">&nbsp;</div>
+    <div class="dashboard-sidebar-inner">
+        <div class="user-sidebar-header">
+            <a href="https://golivest.site">
+                <img src="https://golivest.site/assets/images/oJRC5aoJ1717391832.png" alt="logo">
+            </a>
+            <div class="sidebar-close">
+                <span class="close">&nbsp;</span>
+            </div>
+        </div>
+        <div class="user-sidebar-body">
+            <ul class="user-sidbar-link">
+                <li>
+                    <span class="subtitle">General Information</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/dashboard" class="">
+                        <span class="icon"><i class="fas fa-archive"></i></span>
+                        Dashboard                    </a>
+                </li>
+
+                <li>
+                    <a href="https://golivest.site/user/transactions" class="">
+                        <span class="icon"><i class="fas fa-briefcase"></i></span>
+                        Transactions                    </a>
+                </li>
+
+
+                <li>
+                    <span class="subtitle">Invest</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/invest/plans" class="active">
+                        <span class="icon"><i class="fas fa-tree"></i></span>
+                        Plans                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/invest/history" class="">
+                        <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                        Invest History                    </a>
+                </li>
+
+                <li>
+                    <span class="subtitle">Transfer & Request</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/money-transfer" class="">
+                        <span class="icon"><i class="fas fa-exchange-alt"></i></span>
+                        Transfer Money                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/money-request" class="">
+                        <span class="icon"><i class="fas fa-credit-card"></i></span>
+                        Send Request Money                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/request-money/receive" class="">
+                        <span class="icon"><i class="fas fa-money-check"></i></span>
+                        Receive Request Money                    </a>
+                </li>
+
+                <li>
+                    <span class="subtitle">Deposits</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/deposit/create" class="">
+                        <span class="icon"><i class="fas fa-business-time"></i></span>
+                        Create Deposit                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/deposits" class="">
+                        <span class="icon"><i class="fas fa-history"></i></span>
+                        Deposit History                    </a>
+                </li>
+                
+                <li>
+                    <span class="subtitle">Payouts</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/payout" class="">
+                        <span class="icon"><i class="fas fa-donate"></i></span>
+                        Payout                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/payouts/history" class="">
+                        <span class="icon"><i class="fas fa-history"></i></span>
+                        Payout History                    </a>
+                </li>
+
+                <li>
+                    <span class="subtitle">Referral</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/referrals" class="">
+                        <span class="icon"><i class="fas fa-address-card"></i></span>
+                        Referred Users                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/referral-commissions" class="">
+                        <span class="icon"><i class="fas fa-history"></i></span>
+                        Referral Commissions                    </a>
+                </li>
+                
+                <li>
+                    <span class="subtitle">Account Information</span>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/support-tickets" class="">
+                        <span class="icon"><i class="fas fa-question-circle"></i></span>
+                        Support Ticket                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/profile" class="">
+                        <span class="icon"><i class="fas fa-user-circle"></i></span>
+                        Edit Profile                    </a>
+                </li>
+                <li>
+                    <a href="https://golivest.site/user/2fa-security" class="">
+                        <span class="icon"><i class="fas fa-lock-open"></i></span>
+                        2FA Security                    </a>
+                </li>
+
+                <li>
+                    <a href="https://golivest.site/user/change-password" class="">
+                        <span class="icon"><i class="fas fa-question-circle"></i></span>
+                        Change Password                    </a>
+                </li>
+
+                <li>
+                    <a href="https://golivest.site/user/logout">
+                        <span class="icon"><i class="fas fa-exchange-alt"></i></span>
+                        Logout                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>        <article class="main--content">
+			<div class="dashboard-header bg--gradient">
+    <div class="navbar-top">
+        <div class="container-fluid">
+            <ul class="d-flex align-items-center justify-content-between py-1 py-md-0">
+                <li>
+                    <div class="nav-toggle me-3">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </li>
+                <li class="me-3">
+                    <div class="change-language">
+                        <select name="language" class="language selectors nice language-bar">
+                                                            <option value="https://golivest.site/language/1" selected >
+                                    EN
+                                </option>
+                                                            <option value="https://golivest.site/language/16"  >
+                                    BN
+                                </option>
+                                                            <option value="https://golivest.site/language/17"  >
+                                    Hindi
+                                </option>
+                                                    </select>
+                    </div>
+                </li>
+
+                <li class="ms-auto me-2">
+                    <div class="change-language">
+                        <select name="currency" class="currency selectors nice language-bar">
+                                                            <option value="https://golivest.site/currency/1" selected>
+                                    USD
+                                </option>
+                                                            <option value="https://golivest.site/currency/4" >
+                                    BDT
+                                </option>
+                                                            <option value="https://golivest.site/currency/6" >
+                                    EUR
+                                </option>
+                                                            <option value="https://golivest.site/currency/8" >
+                                    NGN
+                                </option>
+                                                            <option value="https://golivest.site/currency/9" >
+                                    INR
+                                </option>
+                                                    </select>
+                    </div>
+                </li>
+
+                <li class="me-2">
+                    <div class="mode--toggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </li>
+
+                <li class="position-relative">
+                    <a href="javascript:void(0)" class="dashboard-header-profile">
+                        <img src="https://golivest.site/assets/front/images/clients/client2.jpg" alt="clients">
+                        <div class="name d-none d-sm-block">
+                           uploads
+                        </div>
+                    </a>
+                    <div class="user-toggle-menu">
+                        <ul>
+                            <li>
+                                <a href="https://golivest.site/user/change-password">
+                                    <i class="fas fa-unlock"></i>
+                                    Change Password                                </a>
+                            </li>
+                            <li>
+                                <a href="https://golivest.site/user/2fa-security">
+                                    <i class="fas fa-user-check"></i>
+                                    2FA Security                                </a>
+                            </li>
+                            <li>
+                                <a href="https://golivest.site/user/logout">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Logout                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>            <div class="dashborad--content">
+				<div class="breadcrumb-area">
+    <h3 class="title">Investment plans</h3>
+    <ul class="breadcrumb">
+        <li>
+            <a href="https://golivest.site/user/invest/history">History</a>
+        </li>
+        <li>
+            Investment plans        </li>
+    </ul>
+</div>
+<div class="dashboard--content-item">
+    <div class="pricing--wrapper row g-3 g-md-4 g-lg-3 g-xxl-4">
+                                            <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="plan__item">
+                    <div class="plan__item-header">
+                        <div class="left">
+                            <h5 class="title">Initial Plan</h5>
+                            <span>Most Popular</span>
+                        </div>
+                        <div class="right">
+                            <h5 class="title">2%</h5>
+                            <span>Return</span>
+                        </div>
+                    </div>
+                    <div class="plan__item-body">
+                        <ul>
+                            <li>
+                                <span class="name">Profit</span>
+                                <span class="info">
+                                    Every Day
+                                </span>
+                            </li>
+                            <li>
+                                <span class="name me-1">Capital will back</span>
+                                <span class="badge align-self-center me-auto bg--primary">Yes</span>
+                            </li>
+                        </ul>
+                                                    <h6 class="text-center amount-range">$500</h6>
+                                                <button class="cmn--btn w-100 invest-plan" type="button" data-bs-toggle="modal"
+                            data-bs-target="#invest-modal" data-title="Initial Plan" data-id="9" data-type="1" data-fixAmount="500">
+                            Invest Now                        </button>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="plan__item">
+                    <div class="plan__item-header">
+                        <div class="left">
+                            <h5 class="title">Silver</h5>
+                            <span>Most Popular</span>
+                        </div>
+                        <div class="right">
+                            <h5 class="title">2.5%</h5>
+                            <span>Return</span>
+                        </div>
+                    </div>
+                    <div class="plan__item-body">
+                        <ul>
+                            <li>
+                                <span class="name">Profit</span>
+                                <span class="info">
+                                    Every Month
+                                </span>
+                            </li>
+                            <li>
+                                <span class="name me-1">Capital will back</span>
+                                <span class="badge align-self-center me-auto bg--primary">Yes</span>
+                            </li>
+                        </ul>
+                                                    <h6 class="text-center amount-range">$500 - $9999</h6>
+                                                <button class="cmn--btn w-100 invest-plan" type="button" data-bs-toggle="modal"
+                            data-bs-target="#invest-modal" data-title="Silver" data-id="8" data-type="0" data-fixAmount="0">
+                            Invest Now                        </button>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="plan__item">
+                    <div class="plan__item-header">
+                        <div class="left">
+                            <h5 class="title">Golden</h5>
+                            <span>Vip</span>
+                        </div>
+                        <div class="right">
+                            <h5 class="title">3%</h5>
+                            <span>Return</span>
+                        </div>
+                    </div>
+                    <div class="plan__item-body">
+                        <ul>
+                            <li>
+                                <span class="name">Profit</span>
+                                <span class="info">
+                                    Every Month
+                                </span>
+                            </li>
+                            <li>
+                                <span class="name me-1">Capital will back</span>
+                                <span class="badge align-self-center me-auto bg--primary">Yes</span>
+                            </li>
+                        </ul>
+                                                    <h6 class="text-center amount-range">$10000</h6>
+                                                <button class="cmn--btn w-100 invest-plan" type="button" data-bs-toggle="modal"
+                            data-bs-target="#invest-modal" data-title="Golden" data-id="7" data-type="1" data-fixAmount="10000">
+                            Invest Now                        </button>
+                    </div>
+                </div>
+            </div>
+                        </div>
+</div>
+
+    <!-- Invest Modal -->
+    <div class="modal fade" id="invest-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="investForm" action="https://golivest.site/user/invest/amount" method="POST">
+                    <input type="hidden" name="_token" value="w1h3KD4VzloPPNCv5TQWDDZ1Fe0nCpdXv4pceJNg" autocomplete="off">                    <div class="modal-body p-4">
+                        <h4 class="modal-title text-center plan-title">Basic Plan</h4>
+                        <div class="pt-3 pb-4">
+                            <label for="amount" class="form-label">Enter Amount</label>
+                            <div class="input-group input--group">
+                                <input type="number" name="amount" class="form-group-input form-control form--control bg--section"
+                                    placeholder="0.00" id="modalAmount">
+                                <button type="button" class="input-group-text">USD</button>
+                            </div>
+
+                            <label for="amount" class="form-label">Select Wallet</label>
+                            <div class="input-group input--group">
+                                <select name="wallet" id="investMethod" class="form-control" required>
+                                    <option value="checkout">checkout</option>
+                                    <option value="main_wallet">Main Balance</option>
+                                    <option value="interest_wallet">Interest Balance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" name="investId" id="investId" value="">
+                        <div class="d-flex">
+                            <button type="button" class="btn shadow-none btn--danger me-2 w-50"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn shadow-none btn--success w-50">Proceed</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Invest Modal -->
+				<div class="footer-copyright text-center mt-auto">
+    COPYRIGHT © 2024. All Rights Reserved By Golivest</div>
+            </div>
+        </article>
+    </main>
+    <!-- User Dashboard -->
+
+	<script>
+		let mainurl = 'https://golivest.site';
+	</script>
+    <script src="https://golivest.site/assets/front/js/jquery-3.6.0.min.js"></script>
+    <script src="https://golivest.site/assets/front/js/bootstrap.min.js"></script>
+    <script src="https://golivest.site/assets/front/js/viewport.jquery.js"></script>
+    <script src="https://golivest.site/assets/front/js/odometer.min.js"></script>
+    <script src="https://golivest.site/assets/front/js/lightbox.min.js"></script>
+    <script src="https://golivest.site/assets/front/js/owl.min.js"></script>
+	<script src="https://golivest.site/assets/front/js/notify.js"></script>
+    <script src="https://golivest.site/assets/front/js/main.js"></script>
+	<script src="https://golivest.site/assets/front/js/toastr.min.js"></script>
+    <script src="https://golivest.site/assets/front/js/custom.js"></script>
+
+
+	<script>
+		'use strict';
+        var mercadogateway = null;
+
+		
+		
+		
+			</script>
+
+    <script>
+    'use strict';
+
+    $('.invest-plan').on('click',function(){
+        $('#modalAmount').val('');
+        $('#modalAmount').prop('readonly',false)
+
+        let id = $(this).data('id');
+        let title = $(this).data('title');
+        let type = $(this).data('type');
+
+        if(type == 1){
+            $('#modalAmount').val($(this).attr('data-fixAmount'));
+            $('#modalAmount').prop('readonly',true)
+        }
+        $('#investId').val(id);
+        $('.plan-title').text(title);
+    });
+
+    $(document).on('change','#investMethod',function(){
+        var val = $(this).val();
+
+        if(val == 'checkout'){
+            $('.investForm').prop('action','https://golivest.site/user/invest/amount');
+        }
+
+        if(val == 'main_wallet'){
+            $('.investForm').prop('action','https://golivest.site/user/invest/main');
+        }
+
+        if(val == 'interest_wallet'){
+            $('.investForm').prop('action','https://golivest.site/user/invest/interest');
+        }
+    });
+
+</script>
+</body>
+
+</html>
+
+
