@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const { model, Schema } = require("mongoose");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -22,11 +22,11 @@ mongoose
 
 const UserSchema = new Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    username: { type: String, required: true, unique: true },
-    phone: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    name: { type: String, },
+    email: { type: String,  unique: true },
+    username: { type: String, unique: true },
+    phone: { type: String, unique: true },
+    password: { type: String,  },
   },
   { timestamps: true },
 );
@@ -50,29 +50,27 @@ app.get("/login", (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-<<<<<<< HEAD
-  } catch (error) {}
-});
-=======
     const { email, password } = req.body;
-    const user = User.findOne(email)
-    if (!username || !password) {
-      return res.status(305).send({ message: 'Invalid Credentials...' });
+
+    if (!email || !password) {
+      return res.status(305).send({ message: "Credentials required..." });
     }
-    if(!user){
-      return res.status(404).send({ message: 'User not found...'})
+    
+    const user = User.findOne(email);
+    
+    if (!user) {
+      return res.status(404).send({ message: "User not found..." });
     }
 
-    if(password !== user.password){
-      return res.status(401).send({ message: 'Invalid Credentials...'})
+    if (password !== user.password) {
+      return res.status(401).send({ message: "Invalid Credentials..." });
     }
 
-  res.status(200).send({ message: 'Login successful' })
+    res.status(200).send({ message: "Login successful" });
   } catch (error) {
-    res.status(500).send({ message: 'Error: ' + error.message })
+    res.status(500).send({ message: "Error: " + error.message });
   }
-})
->>>>>>> c9a4c66 (new commit)
+});
 
 app.get("/register", (req, res) => {
   return res.status(200).render("register");
@@ -84,23 +82,10 @@ app.post("/register", async (req, res) => {
     if (!username || !name || !email || !phone || !password) {
       res.status(305).send({ message: "Invalid Credentials..." });
     }
-<<<<<<< HEAD
-    const hashedPassword = await bcrypt.hash(password, 13);
-    const newUser = new User({
-      username,
-      password: hashedPassword,
-      phone,
-      email,
-      name,
-    });
-    const user = await newUser.save();
-    res.status(200).send({ message: "Account Created", user });
-=======
 
-    const newUser = new User({username, phone, email, name});
-    const user = await newUser.save()
-res.status(200).send({ message: 'Account Created', user})
->>>>>>> c9a4c66 (new commit)
+    const newUser = new User({ username, phone, email, name,password });
+    const user = await newUser.save();
+    res.status(200).send({ message: "Account Created" });
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
