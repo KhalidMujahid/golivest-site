@@ -2,13 +2,21 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const { model, Schema } = require("mongoose");
-// const bcrypt = require("bcrypt");
+const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: process.env.SEC,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 mongoose.set("strictQuery", true);
 mongoose
@@ -53,10 +61,10 @@ app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(305).send({ message: "Credentials required..." });
+      return res.status(400).send({ message: "Credentials required..." });
     }
     
-    const user = User.findOne(email);
+     const user = await User.findOne({ email: email })
     
     if (!user) {
       return res.status(404).send({ message: "User not found..." });
@@ -66,9 +74,19 @@ app.post("/login", async (req, res) => {
       return res.status(401).send({ message: "Invalid Credentials..." });
     }
 
-    res.status(200).send({ message: "Login successful" });
+    req.session.userId = user._id;
+
+    res.redirect("/dashboard");
   } catch (error) {
     res.status(500).send({ message: "Error: " + error.message });
+  }
+});
+
+app.get("/dashboard", (req, res) => {
+  if (req.session.userId) {
+    return res.status(200).render("dashboard");
+  } else {
+    return res.redirect("/login");
   }
 });
 
@@ -80,7 +98,7 @@ app.post("/register", async (req, res) => {
   try {
     const { name, username, password, phone, email } = req.body;
     if (!username || !name || !email || !phone || !password) {
-      res.status(305).send({ message: "Invalid Credentials..." });
+      res.status(400).send({ message: "Invalid Credentials..." });
     }
 
     const newUser = new User({ username, phone, email, name,password });
