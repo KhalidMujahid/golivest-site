@@ -92,7 +92,14 @@ app.post("/login", async (req, res) => {
 
 app.get("/dashboard", (req, res) => {
   if (req.session.userId) {
-    return res.status(200).render("dashboard");
+    try {
+      
+      const user = await User.findById(req.session.userId);
+      
+      return res.status(200).render("dashboard", { user });
+    } catch (error) {
+      res.status(500).send({ message: "Error fetching user data" });
+    }
   } else {
     return res.redirect("/login");
   }
@@ -111,10 +118,22 @@ app.post("/register", async (req, res) => {
 
     const newUser = new User({ username, phone, email, name, password });
     const user = await newUser.save();
-    res.status(200).send({ message: "Account Created" });
+
+    req.session.userId = user._id;
+    res.redirect("/dashboard"); 
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      return res.status(500).send({ message: "Error logging out" });
+    }
+    res.redirect("/login");
+  });
 });
 
 app.listen(PORT, () => {
