@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { model, Schema } = require("mongoose");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -15,7 +16,14 @@ app.use(
     secret: process.env.SEC,
     resave: false,
     saveUninitialized: false,
-  })
+    store: MongoStore.create({
+      mongoUrl:
+        process.env.NODE_ENV === "development"
+          ? process.env.MONGO_URI_LOCAL
+          : process.env.MONGO_URI_PUBLIC,
+      collectionName: "sessions",
+    }),
+  }),
 );
 
 mongoose.set("strictQuery", true);
@@ -30,11 +38,11 @@ mongoose
 
 const UserSchema = new Schema(
   {
-    name: { type: String, },
-    email: { type: String,  unique: true },
+    name: { type: String },
+    email: { type: String, unique: true },
     username: { type: String, unique: true },
     phone: { type: String, unique: true },
-    password: { type: String,  },
+    password: { type: String },
   },
   { timestamps: true },
 );
@@ -63,9 +71,9 @@ app.post("/login", async (req, res) => {
     if (!email || !password) {
       return res.status(400).send({ message: "Credentials required..." });
     }
-    
-     const user = await User.findOne({ email: email })
-    
+
+    const user = await User.findOne({ email: email });
+
     if (!user) {
       return res.status(404).send({ message: "User not found..." });
     }
@@ -101,7 +109,7 @@ app.post("/register", async (req, res) => {
       res.status(400).send({ message: "Invalid Credentials..." });
     }
 
-    const newUser = new User({ username, phone, email, name,password });
+    const newUser = new User({ username, phone, email, name, password });
     const user = await newUser.save();
     res.status(200).send({ message: "Account Created" });
   } catch (error) {
