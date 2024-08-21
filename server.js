@@ -86,7 +86,7 @@ app.post("/login", async (req, res) => {
 
     res.json({ redirectUrl: "/dashboard" });
   } catch (error) {
-    res.status(500).send({ message: "Error: " + error.message });
+    res.status(500).send({ errors: ["Error: " + error.message] });
   }
 });
 
