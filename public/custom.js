@@ -212,46 +212,108 @@
       $("#registerform .alert-info").show();
       $("#registerform .alert-info p").html($("#processdata").val());
 
-      $.ajax({
-        method: "POST",
-        url: $(this).prop("action"),
-        data: new FormData(this),
-        dataType: "JSON",
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (data) {
-          if (data == 1) {
-            window.location = mainurl + "/user/dashboard";
-          } else {
-            if (data.errors) {
-              $(".formSpin").css('display', 'none');
-              $("#registerform .alert-success").hide();
-              $("#registerform .alert-info").hide();
-              $("#registerform .alert-danger").show();
-              $("#registerform .alert-danger ul").html("");
-              for (var error in data.errors) {
-                $("#registerform .alert-danger p").html(
-                  data.errors[error]
+      // $.ajax({
+      //   method: "POST",
+      //   url: "/register",
+      //   data: new FormData(this),
+      //   dataType: "JSON",
+      //   contentType: false,
+      //   cache: false,
+      //   processData: false,
+      //   success: function (data) {
+      //     if (data == 1) {
+      //       window.location = mainurl + "/dashboard";
+      //     } else {
+      //       if (data.errors) {
+      //         $(".formSpin").css('display', 'none');
+      //         $("#registerform .alert-success").hide();
+      //         $("#registerform .alert-info").hide();
+      //         $("#registerform .alert-danger").show();
+      //         $("#registerform .alert-danger ul").html("");
+      //         for (var error in data.errors) {
+      //           $("#registerform .alert-danger p").html(
+      //             data.errors[error]
+      //           );
+      //         }
+      //         $("#registerform button.submit-btn").prop(
+      //           "disabled",
+      //           false
+      //         );
+      //       } else {
+      //         $(".formSpin").css('display', 'none');
+      //         $("#registerform .alert-info").hide();
+      //         $("#registerform .alert-danger").hide();
+      //         $("#registerform .alert-success").show();
+      //         $("#registerform .alert-success p").html(data);
+      //         $("#registerform button.submit-btn").prop(
+      //           "disabled",
+      //           false
+      //         );
+      //       }
+      //     }
+      //   },
+      // });
+      $("#registerform").on("submit", function (e) {
+        e.preventDefault();
+
+        $(".formSpin").css('display', 'inline-block');
+        $("#registerform button.submit-btn").prop("disabled", true);
+        $("#registerform .alert-info").show();
+        $("#registerform .alert-info p").html($("#processdata").val());
+
+        $.ajax({
+          method: "POST",
+          url: "/register",
+          data: new FormData(this),
+          dataType: "JSON",
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function (data) {
+            if (data.success) { // Check for a 'success' property in the response
+              window.location.href = mainurl + "/dashboard";
+            } else {
+              if (data.errors) {
+                $(".formSpin").css('display', 'none');
+                $("#registerform .alert-success").hide();
+                $("#registerform .alert-info").hide();
+                $("#registerform .alert-danger").show();
+                $("#registerform .alert-danger ul").html("");
+                for (var error in data.errors) {
+                  $("#registerform .alert-danger p").html(
+                    data.errors[error]
+                  );
+                }
+                $("#registerform button.submit-btn").prop(
+                  "disabled",
+                  false
+                );
+              } else {
+                // Handle other responses (e.g., display generic success message)
+                $(".formSpin").css('display', 'none');
+                $("#registerform .alert-info").hide();
+                $("#registerform .alert-danger").hide();
+                $("#registerform .alert-success").show();
+                $("#registerform .alert-success p").html(data.message || "Registration Successful!");
+                $("#registerform button.submit-btn").prop(
+                  "disabled",
+                  false
                 );
               }
-              $("#registerform button.submit-btn").prop(
-                "disabled",
-                false
-              );
-            } else {
-              $(".formSpin").css('display', 'none');
-              $("#registerform .alert-info").hide();
-              $("#registerform .alert-danger").hide();
-              $("#registerform .alert-success").show();
-              $("#registerform .alert-success p").html(data);
-              $("#registerform button.submit-btn").prop(
-                "disabled",
-                false
-              );
             }
+          },
+          error: function (error) {
+            // Handle AJAX errors (e.g., network issues)
+            $(".formSpin").css('display', 'none');
+            $("#registerform button.submit-btn").prop(
+              "disabled",
+              false
+            );
+            console.error("Registration Error:", error);
+            $("#registerform .alert-danger").show();
+            $("#registerform .alert-danger p").html("An error occurred during registration. Please try again later.");
           }
-        },
+        });
       });
     });
 

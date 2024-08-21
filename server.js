@@ -109,20 +109,20 @@ app.get("/register", (req, res) => {
   return res.status(200).render("register");
 });
 
-app.post("/register", async (req, res) => {
+app.post('/register', async (req, res) => {
+  const { name, username, password, phone, email } = req.body;
+  if (!username || !name || !email || !phone || !password) {
+    res.status(400).json({ message: "Invalid Credentials..." });
+    return;
+  }
   try {
-    const { name, username, password, phone, email } = req.body;
-    if (!username || !name || !email || !phone || !password) {
-      res.status(400).send({ message: "Invalid Credentials..." });
-    }
-
     const newUser = new User({ username, phone, email, name, password });
     const user = await newUser.save();
-
     req.session.userId = user._id;
-    res.redirect("/dashboard"); 
+    res.json({ success: true, message: 'Registration Successful!' });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    console.error(error);
+    res.status(500).json({ errors: ['Internal Server Error'] });
   }
 });
 
