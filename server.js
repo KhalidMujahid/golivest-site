@@ -69,22 +69,22 @@ app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).send({ message: "Credentials required..." });
+      return res.status(400).send({ errors: ["Credentials required..."] });
     }
 
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return res.status(404).send({ message: "User not found..." });
+      return res.status(404).send({ errors: ["User not found..."] });
     }
 
     if (password !== user.password) {
-      return res.status(401).send({ message: "Invalid Credentials..." });
+      return res.status(401).send({ errors: ["Invalid Credentials..."] });
     }
 
     req.session.userId = user._id;
 
-    res.redirect("/dashboard");
+    res.json({ redirectUrl: "/dashboard" });
   } catch (error) {
     res.status(500).send({ message: "Error: " + error.message });
   }
@@ -111,8 +111,9 @@ app.get("/register", (req, res) => {
 
 app.post('/register', async (req, res) => {
   const { name, username, password, phone, email } = req.body;
+  console.log(req.body);
   if (!username || !name || !email || !phone || !password) {
-    res.status(400).json({ message: "Invalid Credentials..." });
+    res.status(400).json({ errors: ["Invalid Credentials..."] });
     return;
   }
   try {

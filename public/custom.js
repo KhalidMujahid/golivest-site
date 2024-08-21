@@ -171,34 +171,57 @@
       $(".formSpin").css('display', 'inline-block');
       $("#loginform .alert-info").show();
       $("#loginform .alert-info p").html($("#authdata").val());
-      $.ajax({
-        method: "POST",
-        url: $(this).prop("action"),
-        data: new FormData(this),
-        dataType: "JSON",
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (data) {
-          if (data.errors) {
-            $(".formSpin").css('display', 'none');
-            $("#loginform .alert-success").hide();
-            $("#loginform .alert-info").hide();
-            $("#loginform .alert-danger").show();
-            $("#loginform .alert-danger ul").html("");
-            for (var error in data.errors) {
-              $("#loginform .alert-danger p").html(data.errors[error]);
-            }
-          } else {
-            $(".formSpin").css('display', 'none');
-            $("#loginform .alert-info").hide();
-            $("#loginform .alert-danger").hide();
-            $("#loginform .alert-success").show();
-            $("#loginform .alert-success p").html("Success !");
-            window.location = data;
-          }
-          $("#loginform button.submit-btn").prop("disabled", false);
+
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' 
         },
+        body: JSON.stringify({ 
+          email: $('#email').val(), 
+          password: $('#password').val() 
+        })
+      })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then(data => {
+            throw new Error(data.message); 
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.errors) {
+          // Handle errors
+          $(".formSpin").css('display', 'none');
+          $("#loginform .alert-success").hide();
+          $("#loginform .alert-info").hide();
+          $("#loginform .alert-danger").show();
+          $("#loginform .alert-danger ul").html("");
+          for (var error in data.errors) {
+            $("#loginform .alert-danger p").html(data.errors[error]);
+          }
+        } else {
+          // Successful login
+          $(".formSpin").css('display', 'none');
+          $("#loginform .alert-info").hide();
+          $("#loginform .alert-danger").hide();
+          $("#loginform .alert-success").show();
+          $("#loginform .alert-success p").html("Success !");
+          window.location = data.redirectUrl; 
+        }
+        $("#loginform button.submit-btn").prop("disabled", false);
+      })
+      .catch(error => {
+        
+        $(".formSpin").css('display', 'none');
+        $("#loginform button.submit-btn").prop(
+          "disabled",
+          false
+        );
+        console.error("Login Error:", error);
+        $("#loginform .alert-danger").show();
+        $("#loginform .alert-danger p").html("An error occurred during login. Please try again later.");
       });
     });
 
@@ -261,18 +284,29 @@
         $("#registerform .alert-info").show();
         $("#registerform .alert-info p").html($("#processdata").val());
 
-        $.ajax({
-          method: "POST",
-          url: "/register",
-          data: new FormData(this),
-          dataType: "JSON",
-          contentType: false,
-          cache: false,
-          processData: false,
-          success: function (data) {
+        $("#registerform").on("submit", function (e) {
+          e.preventDefault();
+
+          $(".formSpin").css('display', 'inline-block');
+          $("#registerform button.submit-btn").prop("disabled", true);
+          $("#registerform .alert-info").show();
+          $("#registerform .alert-info p").html($("#processdata").val());
+
+          fetch('/register', {
+            method: 'POST',
+            body: new FormData(this)
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
             if (data.success) { // Check for a 'success' property in the response
               window.location.href = mainurl + "/dashboard";
             } else {
+              // console.log(data);
               if (data.errors) {
                 $(".formSpin").css('display', 'none');
                 $("#registerform .alert-success").hide();
@@ -280,6 +314,7 @@
                 $("#registerform .alert-danger").show();
                 $("#registerform .alert-danger ul").html("");
                 for (var error in data.errors) {
+                  console.log(error);
                   $("#registerform .alert-danger p").html(
                     data.errors[error]
                   );
@@ -301,8 +336,8 @@
                 );
               }
             }
-          },
-          error: function (error) {
+          })
+          .catch(error => {
             // Handle AJAX errors (e.g., network issues)
             $(".formSpin").css('display', 'none');
             $("#registerform button.submit-btn").prop(
@@ -312,9 +347,8 @@
             console.error("Registration Error:", error);
             $("#registerform .alert-danger").show();
             $("#registerform .alert-danger p").html("An error occurred during registration. Please try again later.");
-          }
+          });
         });
-      });
     });
 
     $("#forgotform").on("submit", function (e) {
